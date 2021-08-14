@@ -1,0 +1,30 @@
+fork functionality 1/3:
+  stage: 'fork test'
+  script:
+    - test/test.py --test func_get bin/webserver_fork
+
+fork functionality 2/3:
+  stage: 'fork test'
+  script:
+    - test/test.py --test func_set_simple bin/webserver_fork
+
+fork functionality 3/3:
+  stage: 'fork test'
+  script:
+    - test/test.py --test func_set_multiple bin/webserver_fork
+
+fork valgrind:
+  stage: 'fork test'
+  script:
+    - test/test.py --valgrind --test func_set_multiple bin/webserver_fork
+    - test/test.py --valgrind --test func_get bin/webserver_fork
+
+fork robustness 1/2:
+  stage: 'fork test'
+  script:
+    - test/test.py --test robust_get_1 bin/webserver_fork
+
+fork robustness 2/2:
+  stage: 'fork test'
+  script:
+    - test/test.py --test robust_set_1 bin/webserver_fork
