@@ -1,0 +1,30 @@
+libevent functionality 1/3:
+  stage: 'webserver test'
+  script:
+    - test/test.py --test func_get bin/webserver
+
+libevent functionality 2/3:
+  stage: 'webserver test'
+  script:
+    - test/test.py --test func_set_simple bin/webserver
+
+libevent functionality 3/3:
+  stage: 'webserver test'
+  script:
+    - test/test.py --test func_set_multiple bin/webserver
+
+libevent valgrind:
+  stage: 'webserver test'
+  script:
+    - test/test.py --valgrind --test func_set_multiple bin/webserver
+    - test/test.py --valgrind --test func_get bin/webserver
+
+libevent robustness 1/2:
+  stage: 'webserver test'
+  script:
+    - test/test.py --test robust_get_1 bin/webserver
+
+libevent robustness 2/2:
+  stage: 'webserver test'
+  script:
+    - test/test.py --test robust_set_1 bin/webserver
