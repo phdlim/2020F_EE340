@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package assign4;
+
+service Database {
+    rpc AccessDB (Request) returns (Response) {}
+}
+
+service supernode{
+    rpc line_req (Request) returns (Response) {}
+    rpc word_res (Request_word) returns (Response_word) {}
+    rpc word_req (Request_word) returns (Response_word) {}
+    rpc connect (Request) returns (Response) {}
+    rpc get_result (Request) returns (Response) {}
+}
+
+service childnode {
+    rpc getvalue (Request_word) returns (Response_word) {}
+}
+
+message Request {
+    string req = 1;
+}
+
+message Response {
+    string res = 1;
+}
+
+message Request_word {
+    int32 super = 1;
+    int32 index = 2;
+    int32 start = 3;
+    string word = 4;
+}
+
+message Response_word {
+    int32 super = 1;
+    int32 index = 2;
+    int32 start = 3;
+    string word = 4;
+}
