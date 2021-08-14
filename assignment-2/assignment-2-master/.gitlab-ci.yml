@@ -1,0 +1,24 @@
+image: wjuni/ee324-assign2-base
+
+stages:
+  - build
+  - 'fork test'
+  - 'thread test'
+  - 'libevent test'
+
+before_script:
+  - "[ ! -f ./install.sh ] || bash ./install.sh || true"
+  - redis-server --daemonize yes
+ 
+build:
+  stage: build
+  script:
+    - make
+  artifacts:
+    paths:
+      - 'bin/webserver*'
+
+include:
+ - 'test/fork.gitlab-ci.yml'
+ - 'test/thread.gitlab-ci.yml'
+ - 'test/libevent.gitlab-ci.yml'

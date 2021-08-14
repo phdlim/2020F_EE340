@@ -1,0 +1,30 @@
+thread functionality 1/3:
+  stage: 'thread test'
+  script:
+    - test/test.py --test func_get bin/webserver_thread
+
+thread functionality 2/3:
+  stage: 'thread test'
+  script:
+    - test/test.py --test func_set_simple bin/webserver_thread
+
+thread functionality 3/3:
+  stage: 'thread test'
+  script:
+    - test/test.py --test func_set_multiple bin/webserver_thread
+
+thread valgrind:
+  stage: 'thread test'
+  script:
+    - test/test.py --valgrind --test func_set_multiple bin/webserver_thread
+    - test/test.py --valgrind --test func_get bin/webserver_thread
+
+thread robustness 1/2:
+  stage: 'thread test'
+  script:
+    - test/test.py --test robust_get_1 bin/webserver_thread
+
+thread robustness 2/2:
+  stage: 'thread test'
+  script:
+    - test/test.py --test robust_set_1 bin/webserver_thread
